@@ -4,7 +4,14 @@ project(NetworkLib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
-find_package(Boost REQUIRED)
+if (NOT IOS)
+    find_package(Boost REQUIRED)
+else()
+    if (NOT EXISTS ${BOOST_IOS_ROOT})
+        message(FATAL_ERROR "BOOST_ROOT doesn't exist: ${BOOST_IOS_ROOT}")
+    endif()
+    set(Boost_INCLUDE_DIRS "${BOOST_IOS_ROOT}/include")
+endif()
 
 #--------------------------------------------------------------------
 #--- Collecting all files
