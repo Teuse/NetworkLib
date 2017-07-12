@@ -60,7 +60,7 @@ Client::Impl::Impl(Client* parent, unsigned port, std::string ip)
 {
     _dataIO.connectSocketDisconnect([this](SocketPtr socket)                { onSocketDisconnected(socket); });
     _dataIO.connectDataReceived([this](SocketPtr socket, std::string data)  { onDataReceived(socket, data);  });
-    _dataIO.connectErrorEmitted([this](SocketPtr socket, std::string error) { ++_errorCount; errorEmitted(error); });
+    _dataIO.connectErrorEmitted([this](SocketPtr, std::string error) { ++_errorCount; errorEmitted(error); });
 
     _socket = std::make_shared<boost::asio::ip::tcp::socket>(_ioService);
 
@@ -163,7 +163,7 @@ void Client::Impl::onDataReceived(SocketPtr, const std::string& data)
 
 //------------------------------------------------------------------------------
 
-void Client::Impl::onSocketDisconnected(SocketPtr socket)
+void Client::Impl::onSocketDisconnected(SocketPtr)
 {
     closeSocket();
     setState(STATE_OFF);
