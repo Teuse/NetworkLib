@@ -6,7 +6,8 @@
 
 TEMPLATE = lib
 
-CONFIG += c++14
+CONFIG += c++14 \
+          staticlib
 
 # ------------------------------------------------------------------------------
 # --- Collect files
@@ -27,6 +28,7 @@ SOURCES += Network/Client.cpp \
 # ------------------------------------------------------------------------------
 # --- Dependencies
 # ------------------------------------------------------------------------------
+BOOST_ROOT = $$_PRO_FILE_PWD_/../../../boost-ios/build/boost/1.64.0/ios/prefix
 isEmpty(BOOST_ROOT){
     error("NetworkLib: BOOST_ROOT for ios is not defined")
 }
