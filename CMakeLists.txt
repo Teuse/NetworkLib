@@ -4,14 +4,7 @@ project(NetworkLib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
-if (NOT IOS)
-    find_package(Boost REQUIRED)
-else()
-    if (NOT EXISTS ${BOOST_IOS_ROOT})
-        message(FATAL_ERROR "BOOST_ROOT doesn't exist: ${BOOST_IOS_ROOT}")
-    endif()
-    set(Boost_INCLUDE_DIRS "${BOOST_IOS_ROOT}/include")
-endif()
+find_package(NIBoost REQUIRED)
 
 #--------------------------------------------------------------------
 #--- Collecting all files
@@ -30,7 +23,9 @@ add_library(NetworkLib STATIC ${FILES_NET})
 set_target_properties(NetworkLib PROPERTIES LINKER_LANGUAGE CXX)
 
 target_include_directories(NetworkLib PUBLIC .)
-target_include_directories(NetworkLib PUBLIC  ${Boost_INCLUDE_DIRS})
+target_include_directories(NetworkLib PUBLIC  ${BOOST_INCLUDE_DIRS})
+
+target_link_libraries(NetworkLib boost_signals)
 
 if (UNIX AND NOT APPLE)
     target_link_libraries(NetworkLib pthread)
