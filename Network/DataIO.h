@@ -14,9 +14,12 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
+#include <ni/config/3rdparty_guard.h>
+NI_3RDPARTY_INCLUDES_BEGIN
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/circular_buffer.hpp>
 #include <boost/signals2.hpp>
+NI_3RDPARTY_INCLUDES_END
 
 #include <string>
 #include <vector>

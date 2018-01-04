@@ -25,7 +25,7 @@ set_target_properties(NetworkLib PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(NetworkLib PUBLIC .)
 target_include_directories(NetworkLib PUBLIC  ${BOOST_INCLUDE_DIRS})
 
-target_link_libraries(NetworkLib boost_signals)
+target_link_libraries(NetworkLib boost_signals xlibs)
 
 if (UNIX AND NOT APPLE)
     target_link_libraries(NetworkLib pthread)
